@@ -22,8 +22,9 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
-    Route::prefix('playlist')->middleware('permission:create playlists')->group(function(){
+    Route::prefix('playlists')->middleware('permission:create playlists')->group(function(){
         Route::get('/create', [PlaylistController::class, 'create'])->name('create.playlists');
+        Route::post('/create', [PlaylistController::class, 'store']);
         Route::get('/table', [PlaylistController::class, 'table'])->name('table.playlists');
     });
 });
