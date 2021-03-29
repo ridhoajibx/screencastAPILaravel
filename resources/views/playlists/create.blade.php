@@ -1,11 +1,14 @@
 <x-app-layout>
     <x-slot name="title">
-        Dashboard
+        Create playlist
     </x-slot>
+    {{-- @slot('title')
+        Create playlist
+    @endslot --}}
     <div class="p-5">
-        Dashboard
+        Create new playlist
         <div class="text-sm text-gray-400">
-            Welcome
+            Create new playlist
         </div>
     </div>
 </x-app-layout>

@@ -6,16 +6,16 @@
         <a class="block py-2 px-2 text-gray-200" href="/">Home</a>
         <a class="block py-2 px-2 text-gray-200" href="/dashboard">Dashboard</a>
     </div>
-    @if (Auth::user()->can('create playlists'))
+    @can ('create playlists')
         <div class="mb-8">
             <header class="font-medium text-gray-400 uppercase text-sm px-2">
                 Playlist
             </header>
-            <a class="block py-2 px-2 text-gray-200" href="#">Create</a>
-            <a class="block py-2 px-2 text-gray-200" href="#">Table</a>
+            <a class="block py-2 px-2 text-gray-200" href={{ route('create.playlists') }}>Create</a>
+            <a class="block py-2 px-2 text-gray-200" href={{ route('table.playlists') }}>Table</a>
         </div>
-    @endif
-    @if (Auth::user()->can('create tags'))
+    @endcan
+    @can ('create tags')
         <div class="mb-8">
             <header class="font-medium text-gray-400 uppercase text-sm px-2">
                 Category
@@ -23,7 +23,7 @@
             <a class="block py-2 px-2 text-gray-200" href="#">Create</a>
             <a class="block py-2 px-2 text-gray-200" href="#">Table</a>
         </div>
-    @endif
+    @endcan
     @if (Auth::user()->hasRole('admin'))    
         <div class="mb-8">
             <header class="font-medium text-gray-400 uppercase text-sm px-2">

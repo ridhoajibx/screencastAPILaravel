@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="title">
-        Dashboard
+        Your playlist
     </x-slot>
     <div class="p-5">
-        Dashboard
+        Your playlists
         <div class="text-sm text-gray-400">
-            Welcome
+            Playlists
         </div>
     </div>
 </x-app-layout>
