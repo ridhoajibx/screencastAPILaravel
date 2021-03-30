@@ -2,10 +2,10 @@
     <x-slot name="title">
         Dashboard
     </x-slot>
-    <div class="p-5">
+    <x-slot name="header">
         Dashboard
-        <div class="text-sm text-gray-400">
-            Welcome
-        </div>
+    </x-slot>
+    <div class="text-sm text-gray-700">
+        Welcome back, <strong>{{ $user->name }}</strong>
     </div>
 </x-app-layout>
