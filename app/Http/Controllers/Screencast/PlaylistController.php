@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Screencast;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PlaylistRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -14,15 +15,8 @@ class PlaylistController extends Controller
         return view('playlists.create');
     }
 
-    public function store(Request $request)
+    public function store(PlaylistRequest $request)
     {
-        $request->validate([
-            'thumbnail' => 'required|image|mimes:jpeg,jpg,png',
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required|numeric',
-        ]);
-
         Auth::user()->playlists()->create([
             'thumbnail' => $request->file('thumbnail')->store('images/playlists'),
             'name' => $request->name,
@@ -32,6 +26,16 @@ class PlaylistController extends Controller
         ]);
 
         return back();
+    }
+
+    public function edit()
+    {
+        return view('playlists.edit');
+    }
+
+    public function update(Request $request)
+    {
+        dd($request);
     }
 
     public function table()
