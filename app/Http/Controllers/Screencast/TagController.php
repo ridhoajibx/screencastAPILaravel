@@ -21,16 +21,14 @@ class TagController extends Controller
     {
         $tag->create([
             'name' => $request->name,
-            'slug' => Str::slug($request->name . "_" . Str::random(6)),
+            'slug' => Str::slug($request->name),
         ]);
         return back();
     }
 
     public function table()
     {
-        $tags = Tag::latest()->paginate(5);
-        // dd($tags->count());
-        // dd($tags->currentPage());
+        $tags = Tag::withCount('playlists')->latest()->paginate(5);
         return view('tags.table', compact('tags'));
     }
 

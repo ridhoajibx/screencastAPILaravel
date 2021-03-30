@@ -10,6 +10,7 @@
             <tr>
                 <x-th>#</x-th>
                 <x-th>Name</x-th>
+                <x-th>Playlists</x-th>
                 <x-th>Published</x-th>
                 <x-th>Action</x-th>
             </tr>
@@ -20,6 +21,7 @@
                 <x-td>
                     <div>{{ $item->name }}</div>
                 </x-td>
+                <x-td>{{ $item->playlists_count }}</x-td>
                 <x-td>{{ $item->created_at->format('d-m-Y') }}</x-td>
                 <x-td>
                     <div class="flex items-center">
