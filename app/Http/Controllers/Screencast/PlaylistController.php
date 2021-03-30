@@ -40,6 +40,7 @@ class PlaylistController extends Controller
 
     public function table()
     {
-        return view('playlists.table');
+        $playlists = Auth::user()->playlists()->latest()->paginate(10);
+        return view('playlists.table', compact('playlists'));
     }
 }
