@@ -41,6 +41,7 @@ class TagController extends Controller
     {
         $tag->update([
             'name' => $request->name,
+            'slug' => Str::slug($request->name),
         ]);
 
         return redirect(route('table.tags'));

@@ -23,7 +23,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
-    Route::prefix('playlists')->middleware('permission:create playlists')->group(function(){
+    Route::prefix('playlists')->middleware('permission:create playlists')->group(function () {
         Route::get('/create', [PlaylistController::class, 'create'])->name('create.playlists');
         Route::post('/create', [PlaylistController::class, 'store']);
         Route::get('/table', [PlaylistController::class, 'table'])->name('table.playlists');
@@ -32,14 +32,19 @@ Route::middleware('auth')->group(function () {
         Route::delete('{playlist:slug}/delete', [PlaylistController::class, 'destroy'])->name('delete.playlists');
     });
 
-    Route::prefix('tags')->middleware('permission:create tags')->group(function(){
-        Route::get('/create', [TagController::class, 'create'])->name('create.tags');
-        Route::post('/create', [TagController::class, 'store']);
-        Route::get('/table', [TagController::class, 'table'])->name('table.tags');
-        Route::get('{tag:slug}/edit', [TagController::class, 'edit'])->name('edit.tags');
-        Route::put('{tag:slug}/edit', [TagController::class, 'update']);
-        Route::delete('{tag:slug}/delete', [TagController::class, 'destroy'])->name('delete.tags');
+    Route::prefix('tags')->group(function () {
+        Route::middleware('permission:create tags')->group(function () {
+            Route::get('/create', [TagController::class, 'create'])->name('create.tags');
+            Route::post('/create', [TagController::class, 'store']);
+            Route::get('/table', [TagController::class, 'table'])->name('table.tags');
+        });
+
+        Route::middleware('permission:delete tags|edit tags')->group(function () {
+            Route::get('{tag:slug}/edit', [TagController::class, 'edit'])->name('edit.tags');
+            Route::put('{tag:slug}/edit', [TagController::class, 'update']);
+            Route::delete('{tag:slug}/delete', [TagController::class, 'destroy'])->name('delete.tags');
+        });
     });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
