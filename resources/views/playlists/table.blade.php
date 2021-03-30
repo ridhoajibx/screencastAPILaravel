@@ -18,14 +18,24 @@
             @foreach ($playlists as $item)
             <tr>
                 <x-td>{{ $playlists->count() * ($playlists->currentPage() - 1) + $loop->iteration }}</x-td>
-                <x-td>{{ $item->name }}</x-td>
+                <x-td>
+                    <div>
+                        <div>{{ $item->name }}</div>
+                        <div>
+                            @foreach ($item->tags as $tag)
+                                <span class="text-xs mr-1">{{ $tag->name }}</span>
+                            @endforeach
+                        </div>
+                    </div>
+                </x-td>
                 <x-td>{{ $item->price }}</x-td>
                 <x-td>{{ $item->created_at->format('d-m-Y') }}</x-td>
                 <x-td>
                     <div class="flex items-center">
                         <a class="text-blue-500 hover:text-blue-600 underline font-medium text-xs uppercase mr-2"
-                            href={{ route('edit.playlists', $item->slug) }}>Edit</a>
-
+                            href={{ route('edit.playlists', $item->slug) }}>
+                            Edit
+                        </a>
 
                         <div x-data="{ open:false }">
                             <x-modal state="open" x-show="open" title="{{ $item->name }}">
@@ -38,11 +48,9 @@
                                     </button>
                                 </form>
                             </x-modal>
-                            <button 
-                                @click="open = true"
-                                class="text-red-500 hover:text-red-600 underline font-medium text-xs uppercase"
-                                href="#"
-                            >
+                            <button @click="open = true"
+                                class="text-red-500 hover:text-red-600 underline font-medium text-xs uppercase focus:outline-none"
+                                href="#">
                                 Delete
                             </button>
                         </div>
