@@ -15,4 +15,9 @@ class Playlist extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getPictureAttribute()
+    {
+        return asset('storage/' . $this->thumbnail);
+    }
 }

@@ -22,7 +22,12 @@
             @include('layouts.sidebar')
 
             <!-- Page Content -->
-            <main class="w-4/5">
+            <main class="w-4/5 p-5">
+                @if ($header ?? '')
+                    <h1 class="font-light text-2xl">{{ $header ?? '' ?? '' }}</h1>
+                    <div class="w-20 mt-2 mb-5 h-1 bg-blue-500 rounded-full"></div>
+                @endif
+
                 {{ $slot }}
             </main>
         </div>
