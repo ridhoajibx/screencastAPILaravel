@@ -60,4 +60,11 @@ class PlaylistController extends Controller
         $playlists = Auth::user()->playlists()->latest()->paginate(10);
         return view('playlists.table', compact('playlists'));
     }
+
+    public function destroy(Playlist $playlist)
+    {
+        $playlist->tags()->detach();
+        $playlist->delete();
+        return redirect(route('table.playlists'));
+    }
 }
