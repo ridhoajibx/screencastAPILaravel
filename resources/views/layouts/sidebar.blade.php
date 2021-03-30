@@ -18,10 +18,10 @@
     @can ('create tags')
         <div class="mb-8">
             <header class="font-medium text-gray-400 uppercase text-sm px-2">
-                Category
+                Tags
             </header>
-            <a class="block py-2 px-2 text-gray-200" href="#">Create</a>
-            <a class="block py-2 px-2 text-gray-200" href="#">Table</a>
+            <a class="block py-2 px-2 text-gray-200" href={{ route('create.tags') }}>Create</a>
+            <a class="block py-2 px-2 text-gray-200" href={{ route('table.tags') }}>Table</a>
         </div>
     @endcan
     @if (Auth::user()->hasRole('admin'))    
