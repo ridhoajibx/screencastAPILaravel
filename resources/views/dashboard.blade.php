@@ -7,5 +7,10 @@
     </x-slot>
     <div class="text-sm text-gray-700">
         Welcome back, <strong>{{ $user->name }}</strong>
+        <div class="font-medium text-sm text-gray-700 uppercase underline">
+            @foreach ($user->roles as $role)
+                {{ $role->name }}
+            @endforeach
+        </div>
     </div>
 </x-app-layout>

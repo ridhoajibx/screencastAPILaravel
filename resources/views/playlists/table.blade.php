@@ -17,7 +17,8 @@
 
             @foreach ($playlists as $item)
             <tr>
-                <x-td>{{ $playlists->count() * ($playlists->currentPage() - 1) + $loop->iteration }}</x-td>
+                {{-- <x-td>{{ $playlists->count() * ($playlists->currentPage() - 1) + $loop->iteration }}</x-td> --}}
+                <x-td>{{ $playlists->currentPage() * $playlists->perPage() - ($playlists->perPage()) + $loop->iteration }}</x-td>
                 <x-td>
                     <div>
                         <div>{{ $item->name }}</div>

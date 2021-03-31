@@ -19,7 +19,8 @@
 
             @foreach ($tags as $item)
             <tr>
-                <x-td>{{ $tags->count() * ($tags->currentPage()-1) + $loop->iteration }}</x-td>
+                {{-- <x-td>{{ $tags->count() * ($tags->currentPage()-1) + $loop->iteration }}</x-td> --}}
+                <x-td>{{ $tags->currentPage() * $tags->perPage() - ($tags->perPage()) + $loop->iteration }}</x-td>
                 <x-td>
                     <div>{{ $item->name }}</div>
                 </x-td>
