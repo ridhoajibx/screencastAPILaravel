@@ -39,7 +39,7 @@
 
 <div class="my-4">
     <label for="intro" class="flex items-center text-sm font-medium uppercase">
-        <input type="checkbox" name="intro" id="intro" class="mr-2 focus:outline-none focus:ring-transparent border-gray-400 rounded" value={{ old('intro') ?? $video->intro }} />
+        <input type="checkbox" {{ $video->intro ? 'checked' : '' }} name="intro" id="intro" class="mr-2 focus:outline-none focus:ring-transparent border-gray-400 rounded" />
         <span class="select-none">intro</span>
     </label>
 </div>

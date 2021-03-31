@@ -35,6 +35,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/create/into/{playlist:slug}', [VideoController::class, 'create'])->name('create.videos');
         Route::post('/create/into/{playlist:slug}', [VideoController::class, 'store']);
         Route::get('/table/{playlist:slug}', [VideoController::class, 'table'])->name('table.videos');
+        Route::get('edit/{playlist:slug}/{video:unique_video_id}', [VideoController::class, 'edit'])->name('edit.videos');
+        Route::put('edit/{playlist:slug}/{video:unique_video_id}', [VideoController::class, 'update']);
+        Route::delete('delete/{playlist:slug}/{video:unique_video_id}', [VideoController::class, 'destroy'])->name('delete.videos');
     });
 
     Route::prefix('tags')->group(function () {
