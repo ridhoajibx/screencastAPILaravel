@@ -12,6 +12,7 @@ class VideoController extends Controller
 {
     public function create(Playlist $playlist)
     {
+        $this->authorize('update', $playlist);
         return view('videos.create', [
             'playlist' => $playlist,
             'title' => "New video : {$playlist->name}",
