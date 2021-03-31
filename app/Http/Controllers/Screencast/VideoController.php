@@ -10,6 +10,17 @@ use illuminate\Support\Str;
 
 class VideoController extends Controller
 {
+    public function table(Playlist $playlist)
+    {
+        $this->authorize('update', $playlist);
+        $videos = $playlist->videos()->orderBy('episode')->paginate(10);
+        return view('videos.table', [
+            'playlist' => $playlist,
+            'videos' => $videos,
+            'title' => "Table of videos : {$playlist->name}"
+        ]);
+    }
+
     public function create(Playlist $playlist)
     {
         $this->authorize('update', $playlist);
@@ -22,6 +33,7 @@ class VideoController extends Controller
 
     public function store(Playlist $playlist, Request $request)
     {
+        $this->authorize('update', $playlist);
         $attr = request()->validate([
             'title' => 'required',
             'unique_video_id' => 'required',

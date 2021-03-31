@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('videos')->middleware('permission:create playlists')->group(function () {
         Route::get('/create/into/{playlist:slug}', [VideoController::class, 'create'])->name('create.videos');
         Route::post('/create/into/{playlist:slug}', [VideoController::class, 'store']);
+        Route::get('/table/{playlist:slug}', [VideoController::class, 'table'])->name('table.videos');
     });
 
     Route::prefix('tags')->group(function () {

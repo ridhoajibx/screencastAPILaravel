@@ -10,7 +10,6 @@
             <tr>
                 <x-th>#</x-th>
                 <x-th>Name</x-th>
-                <x-th>Videos</x-th>
                 <x-th>Price</x-th>
                 <x-th>Published</x-th>
                 <x-th>Action</x-th>
@@ -24,20 +23,15 @@
                 </x-td>
                 <x-td>
                     <div>
-                        <div>{{ $item->name }}</div>
+                        <div>
+                            <a class="hover:text-blue-600 hover:underline font-medium text-sm" href={{ route('table.videos', $item->slug) }}>{{ $item->name }}</a>
+                        </div>
                         <div>
                             @foreach ($item->tags as $tag)
                             <span class="text-xs mr-1">{{ $tag->name }}</span>
                             @endforeach
                         </div>
                     </div>
-                </x-td>
-                <x-td>
-                    @foreach ($item->videos as $video)
-                        <div>
-                            <a href="#" class="text-xs mr-1 underline hover:text-blue-500">Episode {{ $video->episode }}</a>
-                        </div>
-                    @endforeach
                 </x-td>
                 <x-td>{{ $item->price }}</x-td>
                 <x-td>{{ $item->created_at->format('d-m-Y') }}</x-td>
