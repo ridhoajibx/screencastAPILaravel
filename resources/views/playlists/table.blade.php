@@ -10,6 +10,7 @@
             <tr>
                 <x-th>#</x-th>
                 <x-th>Name</x-th>
+                <x-th>Videos</x-th>
                 <x-th>Price</x-th>
                 <x-th>Published</x-th>
                 <x-th>Action</x-th>
@@ -18,27 +19,41 @@
             @foreach ($playlists as $item)
             <tr>
                 {{-- <x-td>{{ $playlists->count() * ($playlists->currentPage() - 1) + $loop->iteration }}</x-td> --}}
-                <x-td>{{ $playlists->currentPage() * $playlists->perPage() - ($playlists->perPage()) + $loop->iteration }}</x-td>
+                <x-td>
+                    {{ $playlists->currentPage() * $playlists->perPage() - ($playlists->perPage()) + $loop->iteration }}
+                </x-td>
                 <x-td>
                     <div>
                         <div>{{ $item->name }}</div>
                         <div>
                             @foreach ($item->tags as $tag)
-                                <span class="text-xs mr-1">{{ $tag->name }}</span>
+                            <span class="text-xs mr-1">{{ $tag->name }}</span>
                             @endforeach
                         </div>
                     </div>
+                </x-td>
+                <x-td>
+                    @foreach ($item->videos as $video)
+                        <div>
+                            <a href="#" class="text-xs mr-1 underline hover:text-blue-500">Episode {{ $video->episode }}</a>
+                        </div>
+                    @endforeach
                 </x-td>
                 <x-td>{{ $item->price }}</x-td>
                 <x-td>{{ $item->created_at->format('d-m-Y') }}</x-td>
                 <x-td>
                     <div class="flex items-center">
-                        <a class="text-blue-500 hover:text-blue-600 underline font-medium text-xs uppercase mr-2"
+                        <a class="text-blue-500 hover:text-blue-600 underline font-medium text-xs uppercase"
+                            href={{ route('create.videos', $item->slug) }}>
+                            Add Video
+                        </a>
+
+                        <a class="text-blue-500 hover:text-blue-600 underline font-medium text-xs uppercase mx-2"
                             href={{ route('edit.playlists', $item->slug) }}>
                             Edit
                         </a>
 
-                        <div x-data="{ open:false }">
+                        <div x-data="{ open:false }" class="inline-flex">
                             <x-modal state="open" x-show="open" title="{{ $item->name }}">
                                 <form action={{ route('delete.playlists', $item->slug) }} method="post">
                                     @csrf
@@ -50,8 +65,7 @@
                                 </form>
                             </x-modal>
                             <button @click="open = true"
-                                class="text-red-500 hover:text-red-600 underline font-medium text-xs uppercase focus:outline-none"
-                                href="#">
+                                class="text-red-500 hover:text-red-600 underline font-medium text-xs uppercase focus:outline-none">
                                 Delete
                             </button>
                         </div>

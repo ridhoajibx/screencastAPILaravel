@@ -34,7 +34,7 @@
                                 Edit
                             </a>
 
-                            <div x-data="{ open:false }">
+                            <div x-data="{ open:false }" class="inline-flex">
                                 <x-modal state="open" x-show="open" title="{{ $item->name }}">
                                     <form action={{ route('delete.tags', $item->slug) }} method="post">
                                         @csrf

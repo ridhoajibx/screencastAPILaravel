@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Video extends Model
 {
     use HasFactory;
+
+    protected $fillable = [ 'title', 'slug', 'episode', 'unique_video_id', 'runtime', 'intro' ];
+
+    public function playlist()
+    {
+        return $this->belongsTo(Playlist::class);
+    }
 }
