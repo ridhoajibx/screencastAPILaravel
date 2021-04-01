@@ -4,15 +4,20 @@ namespace App\Http\Controllers\Screencast;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PlaylistRequest;
-use App\Models\Screencast\Playlist;
-use App\Models\Screencast\Tag;
-use Illuminate\Http\Request;
+use App\Http\Resources\Screencast\PlaylistResource;
+use App\Models\Screencast\{Playlist, Tag};
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PlaylistController extends Controller
 {
+    public function index()
+    {
+        $playlists = Playlist::with('user')->withCount('videos')->latest()->paginate(10);
+        return PlaylistResource::collection($playlists);
+    }
+
     public function create()
     {
         return view('playlists.create', [
