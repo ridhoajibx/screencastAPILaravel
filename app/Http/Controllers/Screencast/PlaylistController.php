@@ -14,8 +14,13 @@ class PlaylistController extends Controller
 {
     public function index()
     {
-        $playlists = Playlist::with('user')->withCount('videos')->latest()->paginate(10);
+        $playlists = Playlist::with('user')->latest()->paginate(10);
         return PlaylistResource::collection($playlists);
+    }
+
+    public function show(Playlist $playlist)
+    {
+        return new PlaylistResource($playlist);
     }
 
     public function create()

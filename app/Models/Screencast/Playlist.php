@@ -10,6 +10,7 @@ class Playlist extends Model
 {
     use HasFactory;
     protected $fillable = ['thumbnail', 'name', 'slug', 'description', 'price'];
+    protected $withCount = ['videos'];
 
     public function user()
     {
