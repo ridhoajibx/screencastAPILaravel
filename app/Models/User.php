@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Order\Cart;
 use App\Models\Screencast\Playlist;
 use App\Models\Screencast\Tag;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -68,5 +70,23 @@ class User extends Authenticatable
     public function gravatar()
     {
         return 'picture';
+    }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function addToCart(Playlist $playlist)
+    {
+        return $this->carts()->create([
+            'playlist_id' => $playlist->id,
+            'price' => $playlist->price,
+        ]);
+    }
+
+    public function alreadyInCart(Playlist $playlist)
+    {
+        return (bool) $this->carts()->where('playlist_id', $playlist->id)->first();
     }
 }
