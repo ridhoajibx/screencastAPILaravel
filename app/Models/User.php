@@ -50,6 +50,11 @@ class User extends Authenticatable
         return $this->hasMany(Playlist::class);
     }
 
+    public function purchases()
+    {
+        return $this->belongsToMany(Playlist::class, 'purchased_playlist', 'user_id', 'playlist_id');
+    }
+
     public function gravatar()
     {
         return 'picture';
