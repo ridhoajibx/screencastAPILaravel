@@ -33,7 +33,7 @@
                         </div>
                     </div>
                 </x-td>
-                <x-td>{{ $item->price }}</x-td>
+                <x-td>Rp. {{ number_format($item->price, 0, '.', '.') }}</x-td>
                 <x-td>{{ $item->created_at->format('d-m-Y') }}</x-td>
                 <x-td>
                     <div class="flex items-center">
