@@ -52,7 +52,12 @@ class User extends Authenticatable
 
     public function purchases()
     {
-        return $this->belongsToMany(Playlist::class, 'purchased_playlist', 'user_id', 'playlist_id');
+        return $this->belongsToMany(Playlist::class, 'purchased_playlist', 'user_id', 'playlist_id')->withTimestamps();
+    }
+
+    public function buy(Playlist $playlist)
+    {
+        return $this->purchases()->save($playlist);
     }
 
     public function gravatar()
