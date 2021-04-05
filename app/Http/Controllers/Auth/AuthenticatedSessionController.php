@@ -32,6 +32,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'You are logged in'], 200);
+        }
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
@@ -48,6 +52,10 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'You are logged out'], 200);
+        }
 
         return redirect('/');
     }
