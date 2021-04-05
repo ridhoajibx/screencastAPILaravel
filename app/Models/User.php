@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Order\Cart;
+use App\Models\Order\Order;
 use App\Models\Screencast\Playlist;
 use App\Models\Screencast\Tag;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -88,5 +89,10 @@ class User extends Authenticatable
     public function alreadyInCart(Playlist $playlist)
     {
         return (bool) $this->carts()->where('playlist_id', $playlist->id)->first();
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

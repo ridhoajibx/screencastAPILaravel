@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\MeController;
 use App\Http\Controllers\Order\CartController;
+use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Screencast\PlaylistController;
 use App\Http\Controllers\Screencast\VideoController;
 use Illuminate\Support\Facades\Route;
@@ -19,4 +20,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('carts', [CartController::class, 'index']);
     Route::post('add-to-cart/{playlist:slug}', [CartController::class, 'store']);
+
+    Route::post('order/create', [OrderController::class, 'store']);
 });
+
+Route::post('notification-handler', [ OrderController::class, 'notificationHandler' ]);
