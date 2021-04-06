@@ -51,14 +51,14 @@ class PlaylistController extends Controller
         // if ($playlist->user_id !== Auth::user()->id) {
         //     return redirect(route('table.playlists'));
         // }
-        $this->authorize(['update', $playlist]);
+        $this->authorize('update', $playlist);
         $tags = Tag::get();
         return view('playlists.edit', compact([ 'playlist', 'tags']));
     }
 
     public function update(PlaylistRequest $request, Playlist $playlist)
     {
-        $this->authorize(['update', $playlist]);
+        $this->authorize('update', $playlist);
         if ($request->thumbnail) {
             Storage::delete($playlist->thumbnail);
             $thumbnail = $request->file('thumbnail')->store('images/playlists');
@@ -85,7 +85,7 @@ class PlaylistController extends Controller
 
     public function destroy(Playlist $playlist)
     {
-        $this->authorize(['delete', $playlist]);
+        $this->authorize('delete', $playlist);
         Storage::delete($playlist->thumbnail);
         $playlist->tags()->detach();
         $playlist->delete();
