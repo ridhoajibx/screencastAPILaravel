@@ -83,7 +83,7 @@ class User extends Authenticatable
         return $this->carts()->create([
             'playlist_id' => $playlist->id,
             'price' => $playlist->price,
-        ]);
+        ])->load('playlist');
     }
 
     public function alreadyInCart(Playlist $playlist)
