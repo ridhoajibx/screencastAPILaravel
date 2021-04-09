@@ -1,11 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\MeController;
-use App\Http\Controllers\Order\CartController;
-use App\Http\Controllers\Order\OrderController;
-use App\Http\Controllers\Screencast\MyPlaylistController;
-use App\Http\Controllers\Screencast\PlaylistController;
-use App\Http\Controllers\Screencast\VideoController;
+use App\Http\Controllers\Order\{CartController, OrderController};
+use App\Http\Controllers\Screencast\{ CheckIfUserHasBought, MyPlaylistController, PlaylistController, VideoController };
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -17,6 +14,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('remove-cart/{cart}', [CartController::class, 'destroy']);
 
     Route::post('order/create', [OrderController::class, 'store']);
+    Route::get('check-if-user-hasbought-{playlist:slug}', CheckIfUserHasBought::class);
 });
 
 Route::prefix('playlists')->group(function () {
