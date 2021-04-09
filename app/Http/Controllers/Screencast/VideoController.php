@@ -22,7 +22,7 @@ class VideoController extends Controller
     public function show(Playlist $playlist, Video $video)
     {
         if (Auth::user()->hasBought($playlist) || $video->intro == true) {
-            return new VideoResource($video);
+            return (new VideoResource($video))->additional(compact('playlist'));
         }
 
         return ['message' => "You must buy the playlist {$playlist->name} before to wacth"];
