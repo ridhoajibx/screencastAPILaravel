@@ -16,7 +16,7 @@ class VideoController extends Controller
     public function index(Playlist $playlist)
     {
         $videos = $playlist->videos()->orderBy('episode')->get();
-        return VideoResource::collection($videos);
+        return (VideoResource::collection($videos))->additional(compact('playlist'));
     }
 
     public function show(Playlist $playlist, Video $video)
@@ -25,7 +25,7 @@ class VideoController extends Controller
             return (new VideoResource($video))->additional(compact('playlist'));
         }
 
-        return ['message' => "You must buy the playlist {$playlist->name} before to wacth"];
+        return response()->json(['message' => "You must buy the playlist {$playlist->name} before to wacth"], 401);
     }
 
     public function table(Playlist $playlist)
